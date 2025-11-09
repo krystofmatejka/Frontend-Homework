@@ -71,6 +71,15 @@ export async function addItemAction(prevState: unknown, formData: FormData) {
     };
 }
 
+export async function removeItemAction(prevState: unknown, formData: FormData) {
+    const itemId = formData.get('itemId') as string;
+    const index = some_items.findIndex(item => item.id === itemId);
+    if (index >= 0) {
+        some_items.splice(index, 1);
+    }
+    revalidatePath(`/detail/${formData.get('listId')}`);
+}
+
 export async function resetListAction(prevState: unknown, formData: FormData) {
     for (let i = some_items.length; i > 2; i--) {
         some_items.pop();
