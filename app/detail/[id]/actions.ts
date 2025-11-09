@@ -1,11 +1,14 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
+import { type Person, me, someoneElse } from "./users";
 
 type List = {
     id: string;
     title: string;
     items: Item[];
+    owner: Person;
+    members: Person[];
 }
 
 type Item = {
@@ -21,7 +24,9 @@ const database: Record<string, List> = {
         items: [
             { id: "1", title: "Apple", isActive: true },
             { id: "2", title: "Banana", isActive: false },
-        ]
+        ],
+        owner: me,
+        members: [],
     },
     "2": {
         id: "2",
@@ -30,7 +35,9 @@ const database: Record<string, List> = {
             { id: "3", title: "Corn", isActive: true },
             { id: "4", title: "Tomato", isActive: true },
             { id: "5", title: "Guacamole", isActive: false },
-        ]
+        ],
+        owner: someoneElse,
+        members: [me],
     }
 }
 
@@ -44,6 +51,15 @@ export async function fetchList(id: string, isActive: boolean): Promise<List | n
     const itemList = database[id];
 
     if (itemList) {
+        // Check if the current user has access to this list
+        const isOwner = itemList.owner.id === me.id;
+        const isMember = itemList.members.some(member => member.id === me.id);
+        
+        // If user is neither owner nor member, return null to trigger 404
+        if (!isOwner && !isMember) {
+            return null;
+        }
+
         return {
             ...itemList,
             items: itemList.items.filter(item => isActive ? item.isActive === isActive : true),
@@ -93,13 +109,15 @@ export async function resetListAction(prevState: unknown, formData: FormData) {
         delete database[key];
     }
 
-    database["1"] =  {
+    database["1"] = {
         id: "1",
         title: "Fruits",
         items: [
             { id: "1", title: "Apple", isActive: true },
             { id: "2", title: "Banana", isActive: false },
-        ]
+        ],
+        owner: me,
+        members: [],
     }
     database["2"] = {
         id: "2",
@@ -108,7 +126,9 @@ export async function resetListAction(prevState: unknown, formData: FormData) {
             { id: "3", title: "Corn", isActive: true },
             { id: "4", title: "Tomato", isActive: true },
             { id: "5", title: "Guacamole", isActive: false },
-        ]
+        ],
+        owner: someoneElse,
+        members: [me],
     }
 
     revalidatePath(`/detail/${formData.get('listId')}`);
@@ -133,7 +153,92 @@ export async function updateListTitleAction(prevState: unknown, formData: FormDa
     const newTitle = formData.get('title') as string;
 
     const list = database[listId];
+
+    if (!list) {
+        return {
+            success: false,
+            message: 'List not found',
+        }
+    }
+
+    if (list.owner.id !== me.id) {
+        return {
+            success: false,
+            message: 'Only the owner can update the list title',
+        }
+    }
+
     list.title = newTitle;
 
     revalidatePath(`/detail/${formData.get('listId')}`);
+
+    return {
+        success: true,
+        message: 'Title updated successfully',
+    }
+}
+
+export async function updateListMembersAction(prevState: unknown, formData: FormData) {
+    const listId = formData.get('listId') as string;
+    const members = formData.getAll('members') as string[];
+    const list = database[listId];
+    if (!list) {
+        return {
+            success: false,
+            message: 'List not found',
+        }
+    }
+    if (list.owner.id !== me.id) {
+        return {
+            success: false,
+            message: 'Only the owner can update the list members',
+        }
+    }
+    list.members = members.map(memberId => {
+        if (memberId === me.id) {
+            return me;
+        }
+        if (memberId === someoneElse.id) {
+            return someoneElse;
+        }
+        throw new Error('Unknown member id');
+    });
+
+    revalidatePath(`/detail/${formData.get('listId')}`);
+    return {
+        success: true,
+        message: 'Members updated successfully',
+    }
+}
+
+export async function leaveListAction(prevState: unknown, formData: FormData) {
+    const listId = formData.get('listId') as string;
+    const list = database[listId];
+    
+    if (!list) {
+        return {
+            success: false,
+            message: 'List not found',
+        }
+    }
+    
+    // Check if the current user is a member of the list
+    const memberIndex = list.members.findIndex(member => member.id === me.id);
+    
+    if (memberIndex === -1) {
+        return {
+            success: false,
+            message: 'You are not a member of this list',
+        }
+    }
+    
+    // Remove the current user from the members array
+    list.members.splice(memberIndex, 1);
+    
+    revalidatePath(`/detail/${listId}`);
+    
+    return {
+        success: true,
+        message: 'You have left the list successfully',
+    }
 }

@@ -16,7 +16,7 @@ async function DetailList({ id, isActive }: { id: string; isActive: boolean }) {
 
   return (
     <div>
-      <UpdateTitle listId={id} currentTitle={list.title} />
+      <UpdateTitle listId={id} currentTitle={list.title} owner={list.owner} members={list.members} />
       {list.items.map((item) => {
         return <DetailItem key={item.id} id={item.id} title={item.title} isActive={item.isActive} listId={id} />;
       })}
