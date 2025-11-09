@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
+import { it } from "node:test";
 
 type List = {
     id: string;
@@ -19,14 +20,14 @@ const some_items = [
     { id: "2", title: "Banana", isActive: false },
 ]
 
-export async function fetchList(id: string): Promise<List | null | undefined> {
+export async function fetchList(id: string, isActive: boolean): Promise<List | null | undefined> {
     await new Promise((resolve) => setTimeout(resolve, 500));
 
     if (id === "1") {
         return {
             id: "1",
             title: "Fruits",
-            items: some_items
+            items: isActive ?some_items.filter(item => item.isActive === isActive) : some_items,
         };
     }
     if (id === "2") {
@@ -37,7 +38,7 @@ export async function fetchList(id: string): Promise<List | null | undefined> {
                 { id: "3", title: "Corn", isActive: true },
                 { id: "4", title: "Tomato", isActive: true },
                 { id: "5", title: "Guacamole", isActive: false },
-            ]
+            ].filter(item => isActive ? item.isActive === isActive : true),
         };
     }
     if (id === "failed") {
@@ -81,9 +82,13 @@ export async function removeItemAction(prevState: unknown, formData: FormData) {
 }
 
 export async function resetListAction(prevState: unknown, formData: FormData) {
-    for (let i = some_items.length; i > 2; i--) {
+    for (let i = some_items.length; i > 0; i--) {
         some_items.pop();
     }
+    some_items.push(
+        { id: "1", title: "Apple", isActive: true },
+        { id: "2", title: "Banana", isActive: false },
+    );
     revalidatePath(`/detail/${formData.get('listId')}`);
 }
 
