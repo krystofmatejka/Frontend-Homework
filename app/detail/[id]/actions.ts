@@ -77,3 +77,14 @@ export async function resetListAction(prevState: unknown, formData: FormData) {
     }
     revalidatePath(`/detail/${formData.get('listId')}`);
 }
+
+export async function toggleItemIsActive(prevState: unknown, formData: FormData) {
+    const itemId = formData.get('itemId') as string;
+
+    const index = some_items.findIndex(item => item.id === itemId);
+    if (index >= 0) {
+        some_items[index].isActive = !some_items[index].isActive;
+    }
+
+    revalidatePath(`/detail/${formData.get('listId')}`);
+}
