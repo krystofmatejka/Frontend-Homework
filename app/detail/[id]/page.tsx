@@ -5,6 +5,7 @@ import { NewItemForm } from "./components/new-item-form";
 import { ResetStateButton } from "./components/reset-state";
 import { DetailItem } from "./components/detail-item";
 import { ToggleIsActive } from "./components/toggle-is-active";
+import { UpdateTitle } from "./components/update-title";
 
 async function DetailList({ id, isActive }: { id: string; isActive: boolean }) {
   const list = await fetchList(id, isActive);
@@ -15,7 +16,7 @@ async function DetailList({ id, isActive }: { id: string; isActive: boolean }) {
 
   return (
     <div>
-      <h1>{list.title}</h1>
+      <UpdateTitle listId={id} currentTitle={list.title} />
       {list.items.map((item) => {
         return <DetailItem key={item.id} id={item.id} title={item.title} isActive={item.isActive} listId={id} />;
       })}
