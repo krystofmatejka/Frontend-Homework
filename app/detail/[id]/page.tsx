@@ -1,40 +1,59 @@
 import { Suspense } from "react";
 
+type List = {
+  id: string;
+  title: string;
+  items: Item[];
+}
+
 type Item = {
   id: string;
   title: string;
   isActive: boolean;
 }
 
-async function fetchListItems(id: string): Promise<Item[]> {
+async function fetchList(id: string): Promise<List> {
   await new Promise((resolve) => setTimeout(resolve, 500));
 
   if (id === "1") {
-    return [
+    return {
+      id: "1",
+      title: "Fruits",
+      items: [
       { id: "1", title: "Apple", isActive: true },
       { id: "2", title: "Banana", isActive: false },
-    ];
+    ]
+    };
   }
   if (id === "2") {
-    return [
+    return {
+      id: "2",
+      title: "Vegetables",
+      items: [
       { id: "3", title: "Corn", isActive: true },
       { id: "4", title: "Tomato", isActive: true },
       { id: "5", title: "Guacamole", isActive: false },
-    ];
+    ]
+    };
   }
   if (id === "failed") {
     throw new Error("Failed to fetch items.");
   }
-  return [];
+  return {
+    id,
+    title: "Unknown",
+    items: [],
+  };
 }
 
 async function DetailList({ id }: { id: string }) {
   try {
-    const items = await fetchListItems(id);
+    const list = await fetchList(id);
 
     return (
       <div>
-        {items.map((item) => {
+        <h1>{list.title}</h1>
+        {list.items.map((item) => {
           return (<div key={item.id} className={`p-4 mb-2 border ${item.isActive ? 'bg-green-100' : 'bg-red-100'}`}>
             <h2 className="text-xl font-bold">{item.title}</h2>
             <p>Status: {item.isActive ? 'Active' : 'Inactive'}</p>
