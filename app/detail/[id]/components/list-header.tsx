@@ -2,9 +2,9 @@
 
 import { useActionState, useState } from "react";
 import { updateListTitleAction, updateListMembersAction, leaveListAction } from "../actions";
-import { type Person, me } from "../users";
+import { type User, me, users } from "../database";
 
-export function ListHeader({ listId, currentTitle, owner, members }: { listId: string; currentTitle: string, owner: Person; members: Person[] }) {
+export function ListHeader({ listId, currentTitle, owner, members }: { listId: string; currentTitle: string, owner: User; members: User[] }) {
     const [state, formAction, pending] = useActionState(updateListTitleAction, null);
     const [stateMembers, formActionMembers, pendingMembers] = useActionState(updateListMembersAction, null);
     const [stateLeave, formActionLeave, pendingLeave] = useActionState(leaveListAction, null);
@@ -51,8 +51,9 @@ export function ListHeader({ listId, currentTitle, owner, members }: { listId: s
                     <form action={handleMembersFormAction}>
                         <input type="hidden" name="listId" value={listId} />
                         <select name="members" multiple defaultValue={members.map(member => member.id)} className="edit-item-input">
-                            <option value="user-1">John Doe</option>
-                            <option value="user-2">Jane Smith</option>
+                            {users.map(user => (
+                                <option key={user.id} value={user.id}>{user.name}</option>
+                            ))}
                         </select>
                         <button type="submit" disabled={pendingMembers} className="primary-button">
                             {pendingMembers ? 'Updating...' : 'Update Members'}
