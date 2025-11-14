@@ -24,6 +24,8 @@ const database: Record<string, List> = {
         items: [
             { id: "1", title: "Apple", isActive: true },
             { id: "2", title: "Banana", isActive: false },
+            { id: "3", title: "Mango", isActive: true },
+            { id: "4", title: "Banana", isActive: true },
         ],
         owner: me,
         members: [],
@@ -38,11 +40,24 @@ const database: Record<string, List> = {
         ],
         owner: someoneElse,
         members: [me],
+    },
+    "3": {
+        id: "3",
+        title: "Vegetables",
+        items: [
+            { id: "3", title: "Corn", isActive: true },
+            { id: "4", title: "Tomato", isActive: true },
+            { id: "5", title: "Guacamole", isActive: false },
+        ],
+        owner: someoneElse,
+        members: [],
     }
 }
 
+const wait = () => new Promise((resolve) => setTimeout(resolve, 0));
+
 export async function fetchList(id: string, isActive: boolean): Promise<List | null | undefined> {
-    await new Promise((resolve) => setTimeout(resolve, 500));
+    await wait();
 
     if (id === "failed") {
         throw new Error("Failed to fetch items.");
@@ -72,7 +87,7 @@ export async function fetchList(id: string, isActive: boolean): Promise<List | n
 export async function addItemAction(prevState: unknown, formData: FormData) {
     const listId = formData.get('listId') as string;
 
-    await new Promise(resolve => setTimeout(resolve, 500));
+    await wait();
 
     const newItem = {
         id: Math.random().toString(36).substring(7),

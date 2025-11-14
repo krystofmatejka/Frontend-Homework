@@ -1,0 +1,148 @@
+/* Resusable actions */
+
+.primary-button {
+    padding: 10px;
+    background: #005797;
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* Specific components */
+
+.header-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.header-layout > h2 {
+    margin: 0;
+}
+
+/* Add Item */
+
+.new-item-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.new-item-input {
+    padding: 10px;
+    background: #ffffff;
+    border: 0;
+    border-radius: 5px;
+    color: #3a3939;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+    border: 1px solid #d3d3d3;
+}
+
+.new-item-input:focus-visible {
+    border: 1px solid #a1a1a1;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    outline: none;
+}
+
+.add-item-button {
+    padding: 10px;
+    background: #005797;
+    border: 0;
+    border-radius: 5px;
+    color: #ffffff;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* Toggle Active Link */
+.toggle-active-link {
+    display: block;
+    margin: 1.5rem 0;
+}
+
+.toggle-active-link {
+    text-decoration: none;
+    color: #005797;
+}
+
+.toggle-active-link:hover {
+    text-decoration: underline;
+    color: #083a5e;
+}
+
+/* Detail Item */
+.detail-item-layout {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #cfcfcf;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.detail-item-row {
+    flex-grow: 1;
+}
+
+.detail-item {
+    border: 0;
+    background: transparent;
+    padding: 1rem 0;
+    cursor: pointer;
+    font-size: 1.2rem;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    text-align: left;
+    padding: 0.5rem 0;
+}
+
+.detail-item-inactive {
+    text-decoration: line-through;
+    color: gray;
+}
+
+.detail-item-remove-button {
+    color: #fff5f5;
+    background: #e91616;
+    border: 0;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 1rem;
+    box-shadow: 0 3px 8px #0000003d;
+}
+
+/* Edit Item */
+
+.edit-item-admin-layout {
+    display: flex;
+    gap: 1rem;
+    align-items: baseline;
+}
+
+.edit-item-input {
+    padding: 10px;
+    background: #ffffff;
+    border: 0;
+    border-radius: 5px;
+    color: #3a3939;
+    font-size: 1rem;
+    box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+    border: 1px solid #d3d3d3;
+
+    display: block;
+    margin: 0 0 1rem 0;
+}
+
+.edit-item-input:focus-visible {
+    border: 1px solid #a1a1a1;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    outline: none;
+}

@@ -1,7 +1,9 @@
+import './detail.css';
+
 export default function DetailLayout({ children }: { children: React.ReactNode }) {
     return (
         <div className="detail-layout">
-            <h1>Detail Page Layout</h1>
+            <h1>Shopping List</h1>
             {children}
         </div>
     );
