@@ -4,13 +4,14 @@ import { useActionState, useState } from "react";
 import { updateListTitleAction, updateListMembersAction, leaveListAction } from "../actions";
 import { type Person, me } from "../users";
 
-export function UpdateTitle({ listId, currentTitle, owner, members }: { listId: string; currentTitle: string, owner: Person; members: Person[] }) {
+export function ListHeader({ listId, currentTitle, owner, members }: { listId: string; currentTitle: string, owner: Person; members: Person[] }) {
     const [state, formAction, pending] = useActionState(updateListTitleAction, null);
     const [stateMembers, formActionMembers, pendingMembers] = useActionState(updateListMembersAction, null);
     const [stateLeave, formActionLeave, pendingLeave] = useActionState(leaveListAction, null);
     const [isEdditing, setIsEdditing] = useState(false);
 
-    const canEdditing = (owner.id === me.id) || (members.find(member => member.id === me.id));
+    const isOwner = owner.id === me.id;
+    const isMember = members.find(member => member.id === me.id);
 
     const handleMembersFormAction = async (formData: FormData) => {
         await formActionMembers(formData);
@@ -27,18 +28,16 @@ export function UpdateTitle({ listId, currentTitle, owner, members }: { listId: 
         setIsEdditing(false);
     };
 
-    if (!isEdditing && owner.id === me.id) {
+    if (isOwner && !isEdditing) {
         return (
             <div className="header-layout">
                 <h2>{currentTitle}</h2>
-                {canEdditing && (
-                    <button type="button" onClick={() => setIsEdditing(true)} disabled={pending} className="primary-button">Start editing</button>
-                )}
+                <button type="button" onClick={() => setIsEdditing(true)} disabled={pending} className="primary-button">Start editing</button>
             </div>
         )
     }
 
-    if (isEdditing && owner.id === me.id) {
+    if (isOwner && isEdditing) {
         return (
             <div className="header-layout">
                 <div>
@@ -67,7 +66,7 @@ export function UpdateTitle({ listId, currentTitle, owner, members }: { listId: 
         )
     }
 
-    if (members.find(member => member.id === me.id)) {
+    if (isMember) {
         return (
             <div className="header-layout">
                 <h2>{currentTitle}</h2>

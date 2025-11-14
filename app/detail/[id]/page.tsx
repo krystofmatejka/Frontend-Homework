@@ -1,11 +1,10 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { fetchList } from "./actions";
-import { NewItemForm } from "./components/new-item-form";
-import { ResetStateButton } from "./components/reset-state";
-import { DetailItem } from "./components/detail-item";
-import { ToggleIsActive } from "./components/toggle-is-active";
-import { UpdateTitle } from "./components/update-title";
+import { NewItem } from "./components/new-item";
+import { ListItems } from "./components/list-items";
+import { ActiveFilter } from "./components/active-filter";
+import { ListHeader } from "./components/list-header";
 
 async function DetailList({ id, isActive }: { id: string; isActive: boolean }) {
   const list = await fetchList(id, isActive);
@@ -15,15 +14,12 @@ async function DetailList({ id, isActive }: { id: string; isActive: boolean }) {
   }
 
   return (
-    <div>
-      <UpdateTitle listId={id} currentTitle={list.title} owner={list.owner} members={list.members} />
-      <ToggleIsActive listId={id} isActive={isActive} />
-      {list.items.map((item) => {
-        return <DetailItem key={item.id} id={item.id} title={item.title} isActive={item.isActive} listId={id} />;
-      })}
-      <NewItemForm listId={id} />
-      {/*<ResetStateButton listId={id} />*/}
-    </div>
+    <>
+      <ListHeader listId={id} currentTitle={list.title} owner={list.owner} members={list.members} />
+      <NewItem listId={id} />
+      <ActiveFilter listId={id} isActive={isActive} />
+      <ListItems listId={id} items={list.items} />
+    </>
   );
 }
 
@@ -33,10 +29,8 @@ export default async function DetailPage({ params, searchParams }: { params: Pro
   const isActiveParam = Boolean(unwrappedSearchParams.isActive === undefined || unwrappedSearchParams.isActive === 'true');
 
   return (
-    <div>
-      <Suspense fallback={<div>Loading...</div>}>
-        <DetailList id={unwrappedParams.id} isActive={Boolean(isActiveParam)} />
-      </Suspense>
-    </div>
+    <Suspense fallback={<div>Loading...</div>}>
+      <DetailList id={unwrappedParams.id} isActive={Boolean(isActiveParam)} />
+    </Suspense>
   );
 }

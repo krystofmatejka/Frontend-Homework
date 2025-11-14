@@ -5,7 +5,7 @@ export default function DetailError({ error, reset }: { error: Error; reset: () 
         <div>
             <h1>Something went wrong.</h1>
             <p>{error.message}</p>
-            <button onClick={() => reset()}>Try again</button>
+            <button onClick={() => reset()} className="primary-button">Try again</button>
         </div>
     )
 }

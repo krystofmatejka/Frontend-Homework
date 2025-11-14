@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export function ToggleIsActive({ listId, isActive }: { listId: string; isActive: boolean }) {
+export function ActiveFilter({ listId, isActive }: { listId: string; isActive: boolean }) {
     const newIsActive = !isActive;
     return (
         <Link

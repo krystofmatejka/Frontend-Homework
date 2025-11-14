@@ -28,6 +28,10 @@ button {
 
 /* Add Item */
 
+.new-item-spacing {
+    margin: 1rem 0;
+}
+
 .new-item-layout {
     display: flex;
     justify-content: space-between;
