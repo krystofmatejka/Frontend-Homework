@@ -1,0 +1,67 @@
+/* Homepage - Shopping Lists Grid */
+
+.lists-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.list-tile {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 1.5rem;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  border: 1px solid #d3d3d3;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.list-tile:hover {
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: #a1a1a1;
+  transform: translateY(-2px);
+}
+
+.list-tile-title {
+  margin: 0 0 1rem 0;
+  font-size: 1.5rem;
+  color: #005797;
+}
+
+.list-tile-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  color: #3a3939;
+}
+
+.list-tile-label {
+  font-size: 0.9rem;
+  color: #666666;
+}
+
+.list-tile-value {
+  font-weight: bold;
+}
+
+.list-tile-owner {
+  margin-top: 0.5rem;
+  padding-top: 0.5rem;
+  border-top: 1px solid #cfcfcf;
+  font-size: 0.9rem;
+  color: #666666;
+}
+
+.list-tile-owner-badge {
+  display: inline-block;
+  background: #005797;
+  color: white;
+  padding: 0.2rem 0.5rem;
+  border-radius: 3px;
+  font-size: 0.8rem;
+  margin-left: 0.5rem;
+}
