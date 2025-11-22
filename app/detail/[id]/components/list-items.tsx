@@ -2,7 +2,7 @@
 
 import { useActionState } from "react";
 import { toggleItemIsActive, removeItemAction } from "../actions";
-import type { ShoppingListItem } from "../database";
+import type { ShoppingListItem } from "../../../database";
 
 function DetailItem({ listId, item }: { listId: string; item: ShoppingListItem }) {
   const [state, formAction] = useActionState(toggleItemIsActive, null);

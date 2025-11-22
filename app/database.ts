@@ -68,5 +68,27 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: users[2],
     members: [],
+  },
+  "4": {
+    id: "4",
+    title: "Dairy",
+    items: [
+      { id: "6", title: "Milk", isActive: true },
+      { id: "7", title: "Cheese", isActive: true },
+      { id: "8", title: "Yogurt", isActive: false },
+    ],
+    owner: users[0],
+    members: [users[1], users[2]],
+  },
+  "5": {
+    id: "5",
+    title: "Bakery",
+    items: [
+      { id: "9", title: "Bread", isActive: true },
+      { id: "10", title: "Bagel", isActive: true },
+      { id: "11", title: "Croissant", isActive: false },
+    ],
+    owner: users[1],
+    members: [users[0], users[2]],
   }
-}
+};

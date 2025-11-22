@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { fetchAllLists } from "../actions";
-import { me } from "../detail/[id]/database";
-import type { ShoppingList } from "../detail/[id]/database";
-import "../home.css";
+import { fetchAllLists } from "./actions";
+import { me } from "../database";
+import type { ShoppingList } from "../database";
+import "./home.css";
 
 function ListTile({ list }: { list: ShoppingList }) {
   const isOwner = list.owner.id === me.id;

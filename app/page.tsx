@@ -1,13 +1,3 @@
-import { Suspense } from "react";
-import { ShoppingLists } from "./components/shopping-lists";
+import { Home } from "./home/home";
 
-export default function Home() {
-  return (
-    <>
-      <h1>Shopping Lists</h1>
-      <Suspense fallback={<div>Loading...</div>}>
-        <ShoppingLists />
-      </Suspense>
-    </>
-  );
-}
+export default Home;

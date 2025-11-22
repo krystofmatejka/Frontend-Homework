@@ -1,7 +1,7 @@
 'use server';
 
-import { me, shoppingList } from "./detail/[id]/database";
-import type { ShoppingList } from "./detail/[id]/database";
+import { me, shoppingList } from "../database";
+import type { ShoppingList } from "../database";
 
 export async function fetchAllLists(): Promise<ShoppingList[]> {
   const lists = Object.values(shoppingList);
