@@ -1,3 +1,82 @@
+/* Reusable Components */
+
+button {
+  cursor: pointer;
+}
+
+.primary-button {
+  padding: 10px;
+  background: #005797;
+  border: 0;
+  border-radius: 5px;
+  color: #ffffff;
+  font-size: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.secondary-button {
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  color: #3a3939;
+  font-size: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+}
+
+.secondary-button:hover {
+  border-color: #a1a1a1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.new-item-input {
+  padding: 10px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 5px;
+  color: #3a3939;
+  font-size: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  border: 1px solid #d3d3d3;
+  width: 100%;
+}
+
+.new-item-input:focus-visible {
+  border: 1px solid #a1a1a1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  outline: none;
+}
+
+.edit-item-input {
+  padding: 10px;
+  background: #ffffff;
+  border: 0;
+  border-radius: 5px;
+  color: #3a3939;
+  font-size: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  border: 1px solid #d3d3d3;
+  width: 100%;
+}
+
+.edit-item-input:focus-visible {
+  border: 1px solid #a1a1a1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  outline: none;
+}
+
+/* Header */
+
+.list-header-layout {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.list-header-layout>h1 {
+  margin: 0;
+}
+
 /* Homepage - Shopping Lists Grid */
 
 .lists-grid {
@@ -64,4 +143,90 @@
   border-radius: 3px;
   font-size: 0.8rem;
   margin-left: 0.5rem;
+}
+
+/* Modal */
+
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: #ffffff;
+  border-radius: 5px;
+  padding: 2rem;
+  max-width: 500px;
+  width: 90%;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 16px;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  color: #005797;
+}
+
+.modal-close {
+  background: transparent;
+  border: 0;
+  font-size: 2rem;
+  color: #666666;
+  padding: 0;
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  color: #3a3939;
+}
+
+.modal-form-group {
+  margin-bottom: 1.5rem;
+}
+
+.modal-label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #3a3939;
+  font-weight: bold;
+}
+
+.modal-select {
+  min-height: 120px;
+}
+
+.modal-help-text {
+  margin: 0.5rem 0 0 0;
+  font-size: 0.85rem;
+  color: #666666;
+}
+
+.modal-error {
+  color: #e91616;
+  margin-bottom: 1rem;
+}
+
+.modal-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
 }
