@@ -2,6 +2,7 @@ import Link from "next/link";
 import { fetchAllLists } from "./actions";
 import { me } from "../database";
 import type { ShoppingList } from "../database";
+import { ArchiveButton } from "./components/archive-button";
 import "./home.css";
 
 function ListTile({ list }: { list: ShoppingList }) {
@@ -10,21 +11,28 @@ function ListTile({ list }: { list: ShoppingList }) {
   const totalItemsCount = list.items.length;
 
   return (
-    <Link href={`/detail/${list.id}`} className="list-tile">
-      <h2 className="list-tile-title">{list.title}</h2>
-      <div className="list-tile-info">
-        <span className="list-tile-label">Active items:</span>
-        <span className="list-tile-value">{activeItemsCount}</span>
-      </div>
-      <div className="list-tile-info">
-        <span className="list-tile-label">Total items:</span>
-        <span className="list-tile-value">{totalItemsCount}</span>
-      </div>
-      <div className="list-tile-owner">
-        Owner: {list.owner.name}
-        {isOwner && <span className="list-tile-owner-badge">You</span>}
-      </div>
-    </Link>
+    <div className="list-tile">
+      <Link href={`/detail/${list.id}`} className="list-tile-link">
+        <h2 className={`list-tile-title ${list.isArchived ? 'archived' : ''}`}>{list.title}</h2>
+        <div className="list-tile-info">
+          <span className="list-tile-label">Active items:</span>
+          <span className="list-tile-value">{activeItemsCount}</span>
+        </div>
+        <div className="list-tile-info">
+          <span className="list-tile-label">Total items:</span>
+          <span className="list-tile-value">{totalItemsCount}</span>
+        </div>
+        <div className="list-tile-owner">
+          Owner: {list.owner.name}
+          {isOwner && <span className="list-tile-owner-badge">You</span>}
+        </div>
+      </Link>
+      {isOwner && (
+        <div className="list-tile-actions">
+          <ArchiveButton listId={list.id} isArchived={list.isArchived ?? false} />
+        </div>
+      )}
+    </div>
   );
 }
 

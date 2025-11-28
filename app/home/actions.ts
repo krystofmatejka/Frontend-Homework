@@ -56,3 +56,32 @@ export async function createListAction(prevState: unknown, formData: FormData) {
   revalidatePath(`/detail/${newId}`);
   redirect(`/detail/${newId}`);
 }
+
+export async function toggleArchiveAction(listId: string) {
+  const list = shoppingList[listId];
+  
+  if (!list) {
+    return {
+      success: false,
+      message: 'List not found',
+    };
+  }
+  
+  // Check if the current user is the owner
+  if (list.owner.id !== me.id) {
+    return {
+      success: false,
+      message: 'Only the owner can archive/unarchive this list',
+    };
+  }
+  
+  // Toggle the archived status
+  list.isArchived = !list.isArchived;
+  
+  revalidatePath('/');
+  
+  return {
+    success: true,
+    message: list.isArchived ? 'List archived' : 'List unarchived',
+  };
+}
