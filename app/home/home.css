@@ -29,6 +29,24 @@ button {
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
+.archive-toggle-button {
+  padding: 10px;
+  background: #ffffff;
+  border: 1px solid #d3d3d3;
+  border-radius: 5px;
+  color: #3a3939;
+  font-size: 1rem;
+  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.archive-toggle-button:hover {
+  border-color: #a1a1a1;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
 .new-item-input {
   padding: 10px;
   background: #ffffff;
@@ -71,10 +89,6 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: baseline;
-}
-
-.list-header-layout>h1 {
-  margin: 0;
 }
 
 /* Homepage - Shopping Lists Grid */

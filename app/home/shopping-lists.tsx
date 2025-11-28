@@ -28,8 +28,8 @@ function ListTile({ list }: { list: ShoppingList }) {
   );
 }
 
-export async function ShoppingLists() {
-  const lists = await fetchAllLists();
+export async function ShoppingLists({ showArchived }: { showArchived: boolean }) {
+  const lists = await fetchAllLists(showArchived);
 
   if (lists.length === 0) {
     return <p>No shopping lists available.</p>;

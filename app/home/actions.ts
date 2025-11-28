@@ -5,13 +5,19 @@ import { redirect } from "next/navigation";
 import { me, shoppingList, users } from "../database";
 import type { ShoppingList } from "../database";
 
-export async function fetchAllLists(): Promise<ShoppingList[]> {
+export async function fetchAllLists(showArchived: boolean = false): Promise<ShoppingList[]> {
   const lists = Object.values(shoppingList);
   
   return lists.filter(list => {
     const isOwner = list.owner.id === me.id;
     const isMember = list.members.some(member => member.id === me.id);
-    return isOwner || isMember;
+    const hasAccess = isOwner || isMember;
+    
+    if (!hasAccess) return false;
+    
+    // If showArchived is true, show all lists; otherwise, show only non-archived
+    if (showArchived) return true;
+    return !list.isArchived;
   });
 }
 

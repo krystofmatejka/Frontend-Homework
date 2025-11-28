@@ -26,6 +26,7 @@ export type ShoppingList = {
   items: ShoppingListItem[];
   owner: User;
   members: User[];
+  isArchived?: boolean;
 }
 
 export type ShoppingListItem = {
@@ -46,6 +47,7 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: me,
     members: [users[1]],
+    isArchived: false,
   },
   "2": {
     id: "2",
@@ -57,6 +59,7 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: users[1],
     members: [me],
+    isArchived: true,
   },
   "3": {
     id: "3",
@@ -68,6 +71,7 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: users[2],
     members: [],
+    isArchived: false,
   },
   "4": {
     id: "4",
@@ -79,6 +83,7 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: users[0],
     members: [users[1], users[2]],
+    isArchived: false,
   },
   "5": {
     id: "5",
@@ -90,5 +95,6 @@ export const shoppingList: Record<string, ShoppingList> = {
     ],
     owner: users[1],
     members: [users[0], users[2]],
+    isArchived: true,
   }
 };
