@@ -1,8 +1,8 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
-import { me, users, shoppingList } from "./database";
-import type { ShoppingList } from "./database";
+import { me, users, shoppingList } from "../../database";
+import type { ShoppingList } from "../../database";
 
 export async function fetchList(id: string, isActive: boolean): Promise<ShoppingList | null | undefined> {
   if (id === "failed") {

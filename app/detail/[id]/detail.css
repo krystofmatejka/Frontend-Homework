@@ -57,6 +57,8 @@ button {
   font-size: 1rem;
   box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
   border: 1px solid #d3d3d3;
+  margin-right: 16px;
+  flex-grow: 1;
 }
 
 .new-item-input:focus-visible {
@@ -73,6 +75,7 @@ button {
   color: #ffffff;
   font-size: 1rem;
   box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  width: 120px;
 }
 
 /* Active Filter */
