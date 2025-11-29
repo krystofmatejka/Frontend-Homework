@@ -11,6 +11,10 @@ export async function fetchList(id: string, isActive: boolean): Promise<Shopping
 
   const shoppingListItem = shoppingList[id];
 
+  if (shoppingListItem.isArchived) {
+    return null;
+  }
+
   if (shoppingListItem) {
     const isOwner = shoppingListItem.owner.id === me.id;
     const isMember = shoppingListItem.members.some(member => member.id === me.id);
