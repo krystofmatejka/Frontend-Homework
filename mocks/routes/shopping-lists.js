@@ -1,20 +1,27 @@
 // Shopping Lists API routes
 // Based on app/database.ts structure
 
-const USERS = [
+const ALL_USERS = [
   {
-    id: "user-1",
+    id: 1,
     name: "John Doe",
   },
   {
-    id: "user-2",
-    name: "Jane Smith",
+    id: 2,
+    name: "Jane Doe",
   },
   {
-    id: "user-3",
-    name: "Alice Johnson",
+    id: 3,
+    name: "Tommy",
+  },
+  {
+    id: 4,
+    name: "Timmy",
   },
 ];
+
+// Current user
+const ME = ALL_USERS[0];
 
 const SHOPPING_LISTS = [
   {
@@ -26,8 +33,8 @@ const SHOPPING_LISTS = [
       { id: "3", title: "Mango", isActive: true },
       { id: "4", title: "Banana", isActive: true },
     ],
-    owner: USERS[0],
-    members: [USERS[1]],
+    owner: ALL_USERS[0],
+    members: [ALL_USERS[1]],
     isArchived: false,
   },
   {
@@ -38,8 +45,8 @@ const SHOPPING_LISTS = [
       { id: "4", title: "Tomato", isActive: true },
       { id: "5", title: "Guacamole", isActive: false },
     ],
-    owner: USERS[1],
-    members: [USERS[0]],
+    owner: ALL_USERS[1],
+    members: [ALL_USERS[0]],
     isArchived: true,
   },
   {
@@ -50,7 +57,7 @@ const SHOPPING_LISTS = [
       { id: "4", title: "Croissant", isActive: true },
       { id: "5", title: "Donut", isActive: false },
     ],
-    owner: USERS[2],
+    owner: ALL_USERS[2],
     members: [],
     isArchived: false,
   },
@@ -62,8 +69,8 @@ const SHOPPING_LISTS = [
       { id: "7", title: "Cheese", isActive: true },
       { id: "8", title: "Yogurt", isActive: false },
     ],
-    owner: USERS[0],
-    members: [USERS[1], USERS[2]],
+    owner: ALL_USERS[0],
+    members: [ALL_USERS[1], ALL_USERS[2]],
     isArchived: false,
   },
   {
@@ -74,16 +81,43 @@ const SHOPPING_LISTS = [
       { id: "10", title: "Bagel", isActive: true },
       { id: "11", title: "Croissant", isActive: false },
     ],
-    owner: USERS[1],
-    members: [USERS[0], USERS[2]],
+    owner: ALL_USERS[1],
+    members: [ALL_USERS[0], ALL_USERS[2]],
     isArchived: true,
   },
 ];
 
-// Current user for filtering
-const ME = USERS[0];
-
 module.exports = [
+  {
+    id: "get-me",
+    url: "/api/users/me",
+    method: "GET",
+    variants: [
+      {
+        id: "success",
+        type: "json",
+        options: {
+          status: 200,
+          body: ME,
+        },
+      },
+    ],
+  },
+  {
+    id: "get-all-users",
+    url: "/api/users",
+    method: "GET",
+    variants: [
+      {
+        id: "success",
+        type: "json",
+        options: {
+          status: 200,
+          body: ALL_USERS,
+        },
+      },
+    ],
+  },
   {
     id: "get-shopping-lists",
     url: "/api/shopping-lists",
@@ -235,7 +269,7 @@ module.exports = [
               items: [],
               owner: ME,
               members: (members || []).map(memberId => {
-                const user = USERS.find(u => u.id === memberId);
+                const user = ALL_USERS.find(u => u.id === memberId);
                 if (!user) {
                   throw new Error('Unknown member id');
                 }
@@ -304,7 +338,7 @@ module.exports = [
             
             if (members !== undefined) {
               list.members = members.map(memberId => {
-                const user = USERS.find(u => u.id === memberId);
+                const user = ALL_USERS.find(u => u.id === memberId);
                 if (!user) {
                   throw new Error('Unknown member id');
                 }

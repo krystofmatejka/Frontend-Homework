@@ -5,6 +5,8 @@
       "add-headers:enabled",
       "get-users:success",
       "get-user:success",
+      "get-me:success",
+      "get-all-users:success",
       "get-shopping-lists:success",
       "get-shopping-list:success",
       "create-shopping-list:success",

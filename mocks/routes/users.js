@@ -3,7 +3,8 @@
 // https://mocks-server.org/docs/usage/routes
 
 // users data
-const USERS = [
+
+const ALL_USERS = [
   {
     id: 1,
     name: "John Doe",
@@ -12,10 +13,6 @@ const USERS = [
     id: 2,
     name: "Jane Doe",
   },
-];
-
-const ALL_USERS = [
-  ...USERS,
   {
     id: 3,
     name: "Tommy",
@@ -37,7 +34,7 @@ module.exports = [
         type: "json", // variant handler id
         options: {
           status: 200, // status to send
-          body: USERS, // body to send
+          body: ALL_USERS, // body to send
         },
       },
       {
@@ -71,7 +68,7 @@ module.exports = [
         type: "json", // variant handler id
         options: {
           status: 200, // status to send
-          body: USERS[0], // body to send
+          body: ALL_USERS[0], // body to send
         },
       },
       {
@@ -89,7 +86,7 @@ module.exports = [
           // Express middleware to execute
           middleware: (req, res) => {
             const userId = req.params.id;
-            const user = USERS.find((userData) => userData.id === Number(userId));
+            const user = ALL_USERS.find((userData) => userData.id === Number(userId));
             if (user) {
               res.status(200);
               res.send(user);

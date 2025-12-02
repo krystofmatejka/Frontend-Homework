@@ -1,10 +1,9 @@
 import Link from "next/link";
 import { fetchAllLists } from "./actions";
-import { me } from "../types";
-import type { ShoppingList } from "../types";
+import type { ShoppingList, User } from "../types";
 import { ArchiveButton } from "./components/archive-button";
 
-function ListTile({ list }: { list: ShoppingList }) {
+function ListTile({ list, me }: { list: ShoppingList; me: User }) {
   const isOwner = list.owner.id === me.id;
   const activeItemsCount = list.items.filter(item => item.isActive).length;
   const totalItemsCount = list.items.length;
@@ -43,7 +42,7 @@ function ListTile({ list }: { list: ShoppingList }) {
   );
 }
 
-export async function ShoppingLists({ showArchived, failed }: { showArchived: boolean; failed: boolean }) {
+export async function ShoppingLists({ showArchived, failed, me }: { showArchived: boolean; failed: boolean; me: User }) {
   const lists = await fetchAllLists(showArchived, failed);
 
   if (lists.length === 0) {
@@ -53,7 +52,7 @@ export async function ShoppingLists({ showArchived, failed }: { showArchived: bo
   return (
     <div className="lists-grid">
       {lists.map((list) => (
-        <ListTile key={list.id} list={list} />
+        <ListTile key={list.id} list={list} me={me} />
       ))}
     </div>
   );

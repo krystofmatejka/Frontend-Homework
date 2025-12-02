@@ -2,9 +2,9 @@
 
 import { useActionState, useState, useRef } from "react";
 import { createListAction } from "../actions";
-import { users } from "../../types";
+import type { User } from "../../types";
 
-export function NewListModal() {
+export function NewListModal({ users }: { users: User[] }) {
   const [isOpen, setIsOpen] = useState(false);
   const [state, formAction, pending] = useActionState(createListAction, null);
   const formRef = useRef<HTMLFormElement>(null);
