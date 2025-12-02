@@ -1,171 +1,142 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
-import { me, users, shoppingList } from "../../database";
 import type { ShoppingList } from "../../database";
+
+const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3100';
 
 export async function fetchList(id: string, isActive: boolean): Promise<ShoppingList | null | undefined> {
   if (id === "failed") {
     throw new Error("Failed to fetch items.");
   }
 
-  const shoppingListItem = shoppingList[id];
-
-  if (shoppingListItem.isArchived) {
+  const response = await fetch(`${BACKEND_URL}/api/shopping-lists/${id}?isActive=${isActive}`);
+  
+  if (response.status === 404 || response.status === 403) {
     return null;
   }
-
-  if (shoppingListItem) {
-    const isOwner = shoppingListItem.owner.id === me.id;
-    const isMember = shoppingListItem.members.some(member => member.id === me.id);
-    if (!isOwner && !isMember) {
-      return null;
-    }
-
-    return {
-      ...shoppingListItem,
-      items: shoppingListItem.items.filter(item => isActive ? item.isActive === isActive : true),
-    };
+  
+  if (!response.ok) {
+    throw new Error("Failed to fetch items.");
   }
-
-  return null;
+  
+  return response.json();
 }
 
 export async function addItemAction(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
+  const name = formData.get('name') as string;
 
-  const newItem = {
-    id: Math.random().toString(36).substring(7),
-    title: formData.get('name') as string,
-    isActive: true,
+  const response = await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}/items`, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ name }),
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
+    return {
+      success: false,
+      message: result.message || 'Failed to add item',
+    };
   }
-
-  shoppingList[listId].items.push(newItem);
 
   revalidatePath(`/detail/${listId}`);
 
-  return {
-    success: true,
-    message: 'it worked',
-    item: newItem
-  };
+  return result;
 }
 
 export async function removeItemAction(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
   const itemId = formData.get('itemId') as string;
 
-  const index = shoppingList[listId].items.findIndex(item => item.id === itemId);
+  await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}/items/${itemId}`, {
+    method: 'DELETE',
+  });
 
-  if (index >= 0) {
-    shoppingList[listId].items.splice(index, 1);
-  }
-
-  revalidatePath(`/detail/${formData.get('listId')}`);
+  revalidatePath(`/detail/${listId}`);
 }
 
 export async function toggleItemIsActive(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
   const itemId = formData.get('itemId') as string;
 
-  const list = shoppingList[listId];
+  await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}/items/${itemId}/toggle`, {
+    method: 'POST',
+  });
 
-  const index = list.items.findIndex(item => item.id === itemId);
-  if (index >= 0) {
-    list.items[index].isActive = !list.items[index].isActive;
-  }
-
-  revalidatePath(`/detail/${formData.get('listId')}`);
+  revalidatePath(`/detail/${listId}`);
 }
 
 export async function updateListTitleAction(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
-  const newTitle = formData.get('title') as string;
+  const title = formData.get('title') as string;
 
-  const list = shoppingList[listId];
+  const response = await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ title }),
+  });
 
-  if (!list) {
+  const result = await response.json();
+
+  if (!response.ok) {
     return {
       success: false,
-      message: 'List not found',
-    }
+      message: result.message || 'Failed to update title',
+    };
   }
 
-  if (list.owner.id !== me.id) {
-    return {
-      success: false,
-      message: 'Only the owner can update the list title',
-    }
-  }
-
-  list.title = newTitle;
-
-  revalidatePath(`/detail/${formData.get('listId')}`);
-  return {
-    success: true,
-    message: 'Title updated successfully',
-  }
+  revalidatePath(`/detail/${listId}`);
+  return result;
 }
 
 export async function updateListMembersAction(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
   const members = formData.getAll('members') as string[];
-  const list = shoppingList[listId];
 
-  if (!list) {
-    return {
-      success: false,
-      message: 'List not found',
-    }
-  }
-
-  if (list.owner.id !== me.id) {
-    return {
-      success: false,
-      message: 'Only the owner can update the list members',
-    }
-  }
-
-  list.members = members.map(memberId => {
-    const user = users.find(user => user.id === memberId);
-    if (!user) {
-      throw new Error('Unknown member id');
-    }
-    return user;
+  const response = await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}`, {
+    method: 'PATCH',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ members }),
   });
 
-  revalidatePath(`/detail/${formData.get('listId')}`);
-  return {
-    success: true,
-    message: 'Members updated successfully',
+  const result = await response.json();
+
+  if (!response.ok) {
+    return {
+      success: false,
+      message: result.message || 'Failed to update members',
+    };
   }
+
+  revalidatePath(`/detail/${listId}`);
+  return result;
 }
 
 export async function leaveListAction(prevState: unknown, formData: FormData) {
   const listId = formData.get('listId') as string;
-  const list = shoppingList[listId];
 
-  if (!list) {
+  const response = await fetch(`${BACKEND_URL}/api/shopping-lists/${listId}/leave`, {
+    method: 'POST',
+  });
+
+  const result = await response.json();
+
+  if (!response.ok) {
     return {
       success: false,
-      message: 'List not found',
-    }
+      message: result.message || 'Failed to leave list',
+    };
   }
-
-  const memberIndex = list.members.findIndex(member => member.id === me.id);
-
-  if (memberIndex === -1) {
-    return {
-      success: false,
-      message: 'You are not a member of this list',
-    }
-  }
-
-  list.members.splice(memberIndex, 1);
 
   revalidatePath(`/detail/${listId}`);
-  return {
-    success: true,
-    message: 'You have left the list successfully',
-  }
+  return result;
 }
