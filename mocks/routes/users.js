@@ -1,56 +1,32 @@
-// Use this file only as a guide for first steps using routes. Delete it when you have added your own route files.
-// For a detailed explanation regarding each routes property, visit:
-// https://mocks-server.org/docs/usage/routes
-
-// users data
-
-const ALL_USERS = [
-  {
-    id: 1,
-    name: "John Doe",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-  },
-  {
-    id: 3,
-    name: "Tommy",
-  },
-  {
-    id: 4,
-    name: "Timmy",
-  },
-];
+const { ALL_USERS } = require('../data/users');
 
 module.exports = [
   {
-    id: "get-users", // route id
-    url: "/api/users", // url in express format
-    method: "GET", // HTTP method
+    id: "get-users",
+    url: "/api/users",
+    method: "GET",
     variants: [
       {
-        id: "success", // variant id
-        type: "json", // variant handler id
+        id: "success",
+        type: "json",
         options: {
-          status: 200, // status to send
-          body: ALL_USERS, // body to send
+          status: 200,
+          body: ALL_USERS,
         },
       },
       {
-        id: "all", // variant id
-        type: "json", // variant handler id
+        id: "all",
+        type: "json",
         options: {
-          status: 200, // status to send
-          body: ALL_USERS, // body to send
+          status: 200,
+          body: ALL_USERS,
         },
       },
       {
-        id: "error", // variant id
-        type: "json", // variant handler id
+        id: "error",
+        type: "json",
         options: {
-          status: 400, // status to send
-          // body to send
+          status: 400,
           body: {
             message: "Error",
           },
@@ -59,34 +35,33 @@ module.exports = [
     ],
   },
   {
-    id: "get-user", // route id
-    url: "/api/users/:id", // url in express format
-    method: "GET", // HTTP method
+    id: "get-user",
+    url: "/api/users/:id",
+    method: "GET",
     variants: [
       {
-        id: "success", // variant id
-        type: "json", // variant handler id
+        id: "success",
+        type: "json",
         options: {
-          status: 200, // status to send
-          body: ALL_USERS[0], // body to send
+          status: 200,
+          body: ALL_USERS[0],
         },
       },
       {
-        id: "id-3", // variant id
-        type: "json", // variant handler id
+        id: "id-3",
+        type: "json",
         options: {
-          status: 200, // status to send
-          body: ALL_USERS[2], // body to send
+          status: 200,
+          body: ALL_USERS[2],
         },
       },
       {
-        id: "real", // variant id
-        type: "middleware", // variant handler id
+        id: "real",
+        type: "middleware",
         options: {
-          // Express middleware to execute
           middleware: (req, res) => {
             const userId = req.params.id;
-            const user = ALL_USERS.find((userData) => userData.id === Number(userId));
+            const user = ALL_USERS.find((userData) => userData.id === userId);
             if (user) {
               res.status(200);
               res.send(user);

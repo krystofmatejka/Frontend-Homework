@@ -1,27 +1,7 @@
 // Shopping Lists API routes
 // Based on app/database.ts structure
 
-const ALL_USERS = [
-  {
-    id: 1,
-    name: "John Doe",
-  },
-  {
-    id: 2,
-    name: "Jane Doe",
-  },
-  {
-    id: 3,
-    name: "Tommy",
-  },
-  {
-    id: 4,
-    name: "Timmy",
-  },
-];
-
-// Current user
-const ME = ALL_USERS[0];
+const { ALL_USERS, ME } = require('../data/users');
 
 const SHOPPING_LISTS = [
   {
