@@ -110,7 +110,6 @@ module.exports = [
           middleware: (req, res) => {
             const showArchived = req.query.showArchived === "true";
             
-            // Filter lists based on access and archived status
             const filteredLists = SHOPPING_LISTS.filter(list => {
               const isOwner = list.owner.id === ME.id;
               const isMember = list.members.some(member => member.id === ME.id);
@@ -124,24 +123,6 @@ module.exports = [
             
             res.status(200);
             res.send(filteredLists);
-          },
-        },
-      },
-      {
-        id: "all",
-        type: "json",
-        options: {
-          status: 200,
-          body: SHOPPING_LISTS,
-        },
-      },
-      {
-        id: "error",
-        type: "json",
-        options: {
-          status: 500,
-          body: {
-            message: "Failed to fetch shopping lists",
           },
         },
       },
@@ -168,14 +149,12 @@ module.exports = [
               return;
             }
             
-            // Check if list is archived
             if (list.isArchived) {
               res.status(404);
               res.send({ message: "List is archived" });
               return;
             }
             
-            // Check access
             const isOwner = list.owner.id === ME.id;
             const isMember = list.members.some(member => member.id === ME.id);
             
@@ -185,7 +164,6 @@ module.exports = [
               return;
             }
             
-            // Filter items if isActive query param is set
             const filteredList = {
               ...list,
               items: isActive 
@@ -195,26 +173,6 @@ module.exports = [
             
             res.status(200);
             res.send(filteredList);
-          },
-        },
-      },
-      {
-        id: "not-found",
-        type: "json",
-        options: {
-          status: 404,
-          body: {
-            message: "Shopping list not found",
-          },
-        },
-      },
-      {
-        id: "error",
-        type: "json",
-        options: {
-          status: 500,
-          body: {
-            message: "Failed to fetch items",
           },
         },
       },
@@ -262,17 +220,6 @@ module.exports = [
             
             res.status(201);
             res.send(newList);
-          },
-        },
-      },
-      {
-        id: "error",
-        type: "json",
-        options: {
-          status: 400,
-          body: {
-            success: false,
-            message: "Failed to create shopping list",
           },
         },
       },
@@ -336,17 +283,6 @@ module.exports = [
               message: 'List updated successfully',
               list,
             });
-          },
-        },
-      },
-      {
-        id: "error",
-        type: "json",
-        options: {
-          status: 400,
-          body: {
-            success: false,
-            message: "Failed to update shopping list",
           },
         },
       },
@@ -478,17 +414,6 @@ module.exports = [
               message: 'Item added successfully',
               item: newItem,
             });
-          },
-        },
-      },
-      {
-        id: "error",
-        type: "json",
-        options: {
-          status: 400,
-          body: {
-            success: false,
-            message: "Failed to add item",
           },
         },
       },
