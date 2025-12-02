@@ -2,7 +2,7 @@
 
 import { useActionState, useState, useRef } from "react";
 import { createListAction } from "../actions";
-import { users } from "../../database";
+import { users } from "../../types";
 
 export function NewListModal() {
   const [isOpen, setIsOpen] = useState(false);

@@ -2,11 +2,15 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import type { ShoppingList } from "../database";
+import type { ShoppingList } from "../types";
 
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3100';
 
-export async function fetchAllLists(showArchived: boolean = false): Promise<ShoppingList[]> {
+export async function fetchAllLists(showArchived: boolean = false, failed: boolean = false): Promise<ShoppingList[]> {
+  if (failed) {
+    throw new Error('Failed to fetch shopping lists');
+  }
+
   const response = await fetch(`${BACKEND_URL}/api/shopping-lists?showArchived=${showArchived}`);
   
   if (!response.ok) {

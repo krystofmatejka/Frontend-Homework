@@ -1,9 +1,8 @@
 import Link from "next/link";
 import { fetchAllLists } from "./actions";
-import { me } from "../database";
-import type { ShoppingList } from "../database";
+import { me } from "../types";
+import type { ShoppingList } from "../types";
 import { ArchiveButton } from "./components/archive-button";
-import "./home.css";
 
 function ListTile({ list }: { list: ShoppingList }) {
   const isOwner = list.owner.id === me.id;
@@ -44,8 +43,8 @@ function ListTile({ list }: { list: ShoppingList }) {
   );
 }
 
-export async function ShoppingLists({ showArchived }: { showArchived: boolean }) {
-  const lists = await fetchAllLists(showArchived);
+export async function ShoppingLists({ showArchived, failed }: { showArchived: boolean; failed: boolean }) {
+  const lists = await fetchAllLists(showArchived, failed);
 
   if (lists.length === 0) {
     return <p>No shopping lists available.</p>;

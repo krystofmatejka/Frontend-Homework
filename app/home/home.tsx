@@ -6,9 +6,10 @@ import "./home.css";
 
 type HomeProps = {
   showArchived: boolean;
+  failed: boolean;
 };
 
-export function Home({ showArchived }: HomeProps) {
+export function Home({ showArchived, failed }: HomeProps) {
   return (
     <>
       <div className="list-header-layout">
@@ -19,7 +20,7 @@ export function Home({ showArchived }: HomeProps) {
         </div>
       </div>
       <Suspense fallback={<div>Loading...</div>}>
-        <ShoppingLists showArchived={showArchived} />
+        <ShoppingLists showArchived={showArchived} failed={failed} />
       </Suspense>
     </>
   );

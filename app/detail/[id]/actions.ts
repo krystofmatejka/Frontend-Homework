@@ -1,7 +1,7 @@
 'use server';
 
 import { revalidatePath } from "next/cache";
-import type { ShoppingList } from "../../database";
+import type { ShoppingList } from "../../types";
 
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3100';
 
