@@ -1,0 +1,20 @@
+[
+  {
+    "id": "base",
+    "routes": [
+      "get-users:success",
+      "get-user:success",
+      "get-me:success",
+      "get-all-users:success",
+      "get-shopping-lists:success",
+      "get-shopping-list:success",
+      "create-shopping-list:success",
+      "update-shopping-list:success",
+      "toggle-archive-list:success",
+      "leave-shopping-list:success",
+      "add-list-item:success",
+      "remove-list-item:success",
+      "toggle-item-active:success"
+    ]
+  }
+]
