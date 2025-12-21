@@ -35,6 +35,11 @@ export const detailPageTranslations = {
     listItems: {
       removeItem: 'Remove Item',
     },
+    stats: {
+      title: 'Items Statistics',
+      completed: 'Completed',
+      notCompleted: 'Not Completed',
+    },
   },
   'cs': {
     layout: {
@@ -72,6 +77,11 @@ export const detailPageTranslations = {
     listItems: {
       removeItem: 'Odebrat položku',
     },
+    stats: {
+      title: 'Statistika položek',
+      completed: 'Dokončeno',
+      notCompleted: 'Nedokončeno',
+    },
   },
   'de': {
     layout: {
@@ -108,6 +118,11 @@ export const detailPageTranslations = {
     },
     listItems: {
       removeItem: 'Artikel entfernen',
+    },
+    stats: {
+      title: 'Artikelstatistik',
+      completed: 'Abgeschlossen',
+      notCompleted: 'Nicht abgeschlossen',
     },
   }
 } as const;

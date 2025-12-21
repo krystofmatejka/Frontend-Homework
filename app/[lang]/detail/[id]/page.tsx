@@ -6,6 +6,7 @@ import { NewItem } from "./components/new-item";
 import { ListItems } from "./components/list-items";
 import { ActiveFilter } from "./components/active-filter";
 import { ListHeader } from "./components/list-header";
+import { Stats } from "./components/stats";
 import { detailPageTranslations, type DetailTranslation } from "./translations";
 import type { User } from "../../../types";
 
@@ -21,6 +22,7 @@ async function DetailList({ id, isActive, me, users, translation }: { id: string
       <ListHeader listId={id} currentTitle={list.title} owner={list.owner} members={list.members} me={me} users={users} translation={translation} />
       <NewItem listId={id} translation={translation} />
       <ActiveFilter listId={id} isActive={isActive} translation={translation} />
+      <Stats items={list.items} translation={translation} />
       <ListItems listId={id} items={list.items} translation={translation} />
     </>
   );
