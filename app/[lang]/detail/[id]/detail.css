@@ -6,22 +6,22 @@ button {
 
 .primary-button {
   padding: 10px;
-  background: #005797;
+  background: var(--button-bg-primary);
   border: 0;
   border-radius: 5px;
-  color: #ffffff;
+  color: var(--button-text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
 }
 
 .remove-button {
-  color: #fff5f5;
-  background: #e91616;
+  color: var(--button-text-danger);
+  background: var(--button-bg-danger);
   border: 0;
   border-radius: 5px;
   padding: 10px;
   font-size: 1rem;
-  box-shadow: 0 3px 8px #0000003d;
+  box-shadow: var(--shadow-medium) 0 3px 8px;
 }
 
 /* Specific components */
@@ -50,31 +50,31 @@ button {
 
 .new-item-input {
   padding: 10px;
-  background: #ffffff;
+  background: var(--input-bg);
   border: 0;
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
-  border: 1px solid #d3d3d3;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
+  border: 1px solid var(--border-color);
   margin-right: 16px;
   flex-grow: 1;
 }
 
 .new-item-input:focus-visible {
-  border: 1px solid #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
   outline: none;
 }
 
 .add-item-button {
   padding: 10px;
-  background: #005797;
+  background: var(--button-bg-primary);
   border: 0;
   border-radius: 5px;
-  color: #ffffff;
+  color: var(--button-text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
   width: 120px;
 }
 
@@ -86,12 +86,12 @@ button {
 
 .active-filter-link {
   text-decoration: none;
-  color: #005797;
+  color: var(--accent-primary);
 }
 
 .active-filter-link:hover {
   text-decoration: underline;
-  color: #083a5e;
+  color: var(--accent-primary-hover);
 }
 
 /* Detail Item */
@@ -99,7 +99,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  border-bottom: 1px solid #cfcfcf;
+  border-bottom: 1px solid var(--border-color-light);
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
 }
@@ -123,7 +123,7 @@ button {
 
 .detail-item-inactive {
   text-decoration: line-through;
-  color: gray;
+  color: var(--text-inactive);
 }
 
 /* Edit Item */
@@ -136,20 +136,20 @@ button {
 
 .edit-item-input {
   padding: 10px;
-  background: #ffffff;
+  background: var(--input-bg);
   border: 0;
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
-  border: 1px solid #d3d3d3;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
+  border: 1px solid var(--border-color);
 
   display: block;
   margin: 0 0 1rem 0;
 }
 
 .edit-item-input:focus-visible {
-  border: 1px solid #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
   outline: none;
 }

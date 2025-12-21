@@ -6,80 +6,80 @@ button {
 
 .primary-button {
   padding: 10px;
-  background: #005797;
+  background: var(--button-bg-primary);
   border: 0;
   border-radius: 5px;
-  color: #ffffff;
+  color: var(--button-text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
 }
 
 .secondary-button {
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #d3d3d3;
+  background: var(--button-bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--button-text-secondary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
 }
 
 .secondary-button:hover {
-  border-color: #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
 }
 
 .archive-toggle-button {
   padding: 10px;
-  background: #ffffff;
-  border: 1px solid #d3d3d3;
+  background: var(--button-bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--button-text-secondary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
   cursor: pointer;
   text-decoration: none;
   display: inline-block;
 }
 
 .archive-toggle-button:hover {
-  border-color: #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
 }
 
 .new-item-input {
   padding: 10px;
-  background: #ffffff;
+  background: var(--input-bg);
   border: 0;
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
-  border: 1px solid #d3d3d3;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
+  border: 1px solid var(--border-color);
   width: 100%;
 }
 
 .new-item-input:focus-visible {
-  border: 1px solid #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
   outline: none;
 }
 
 .edit-item-input {
   padding: 10px;
-  background: #ffffff;
+  background: var(--input-bg);
   border: 0;
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--text-primary);
   font-size: 1rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
-  border: 1px solid #d3d3d3;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
+  border: 1px solid var(--border-color);
   width: 100%;
 }
 
 .edit-item-input:focus-visible {
-  border: 1px solid #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+  border: 1px solid var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
   outline: none;
 }
 
@@ -101,17 +101,17 @@ button {
 }
 
 .list-tile {
-  background: #ffffff;
+  background: var(--bg-primary);
   border-radius: 5px;
   padding: 1.5rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 3px 8px;
-  border: 1px solid #d3d3d3;
+  box-shadow: var(--shadow-light) 0px 3px 8px;
+  border: 1px solid var(--border-color);
   transition: all 0.2s ease;
 }
 
 .list-tile:hover {
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  border-color: #a1a1a1;
+  box-shadow: var(--shadow-medium) 0px 3px 8px;
+  border-color: var(--border-color-hover);
   transform: translateY(-2px);
 }
 
@@ -124,38 +124,38 @@ button {
 .list-tile-actions {
   margin-top: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #e0e0e0;
+  border-top: 1px solid var(--border-color-subtle);
   display: flex;
   gap: 0.5rem;
 }
 
 .archive-list-button {
   padding: 8px 12px;
-  background: #ffffff;
-  border: 1px solid #d3d3d3;
+  background: var(--button-bg-secondary);
+  border: 1px solid var(--border-color);
   border-radius: 5px;
-  color: #3a3939;
+  color: var(--button-text-secondary);
   font-size: 0.9rem;
-  box-shadow: rgba(0, 0, 0, 0.14) 0px 2px 4px;
+  box-shadow: var(--shadow-light) 0px 2px 4px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .archive-list-button:hover {
-  border-color: #a1a1a1;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 2px 4px;
-  background: #f5f5f5;
+  border-color: var(--border-color-hover);
+  box-shadow: var(--shadow-medium) 0px 2px 4px;
+  background: var(--bg-secondary);
 }
 
 .list-tile-title {
   margin: 0 0 1rem 0;
   font-size: 1.5rem;
-  color: #005797;
+  color: var(--accent-primary);
 }
 
 .list-tile-title.archived {
   text-decoration: line-through;
-  color: #666666;
+  color: var(--archived-text);
 }
 
 .list-tile-info {
@@ -163,12 +163,12 @@ button {
   justify-content: space-between;
   align-items: center;
   margin-bottom: 0.5rem;
-  color: #3a3939;
+  color: var(--text-primary);
 }
 
 .list-tile-label {
   font-size: 0.9rem;
-  color: #666666;
+  color: var(--text-secondary);
 }
 
 .list-tile-value {
@@ -178,14 +178,14 @@ button {
 .list-tile-owner {
   margin-top: 0.5rem;
   padding-top: 0.5rem;
-  border-top: 1px solid #cfcfcf;
+  border-top: 1px solid var(--border-color-light);
   font-size: 0.9rem;
-  color: #666666;
+  color: var(--text-secondary);
 }
 
 .list-tile-owner-badge {
   display: inline-block;
-  background: #005797;
+  background: var(--accent-primary);
   color: white;
   padding: 0.2rem 0.5rem;
   border-radius: 3px;
@@ -201,7 +201,7 @@ button {
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.5);
+  background: var(--modal-overlay-bg);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -209,12 +209,12 @@ button {
 }
 
 .modal-content {
-  background: #ffffff;
+  background: var(--bg-primary);
   border-radius: 5px;
   padding: 2rem;
   max-width: 500px;
   width: 90%;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 8px 16px;
+  box-shadow: var(--shadow-medium) 0px 8px 16px;
 }
 
 .modal-header {
@@ -226,14 +226,14 @@ button {
 
 .modal-header h2 {
   margin: 0;
-  color: #005797;
+  color: var(--accent-primary);
 }
 
 .modal-close {
   background: transparent;
   border: 0;
   font-size: 2rem;
-  color: #666666;
+  color: var(--text-secondary);
   padding: 0;
   width: 30px;
   height: 30px;
@@ -244,7 +244,7 @@ button {
 }
 
 .modal-close:hover {
-  color: #3a3939;
+  color: var(--text-primary);
 }
 
 .modal-form-group {
@@ -254,7 +254,7 @@ button {
 .modal-label {
   display: block;
   margin-bottom: 0.5rem;
-  color: #3a3939;
+  color: var(--text-primary);
   font-weight: bold;
 }
 
@@ -265,11 +265,11 @@ button {
 .modal-help-text {
   margin: 0.5rem 0 0 0;
   font-size: 0.85rem;
-  color: #666666;
+  color: var(--text-secondary);
 }
 
 .modal-error {
-  color: #e91616;
+  color: var(--button-bg-danger);
   margin-bottom: 1rem;
 }
 
