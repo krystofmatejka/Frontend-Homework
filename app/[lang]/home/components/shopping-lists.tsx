@@ -13,16 +13,16 @@ function ListTile({ list, me, translation }: { list: ShoppingList; me: User; tra
     <>
       <h2 className={`list-tile-title ${list.isArchived ? 'archived' : ''}`}>{list.title}</h2>
       <div className="list-tile-info">
-        <span className="list-tile-label">Active items:</span>
+        <span className="list-tile-label">{translation.shoppingLists.activeItems}:</span>
         <span className="list-tile-value">{activeItemsCount}</span>
       </div>
       <div className="list-tile-info">
-        <span className="list-tile-label">Total items:</span>
+        <span className="list-tile-label">{translation.shoppingLists.totalItems}:</span>
         <span className="list-tile-value">{totalItemsCount}</span>
       </div>
       <div className="list-tile-owner">
-        Owner: {list.owner.name}
-        {isOwner && <span className="list-tile-owner-badge">You</span>}
+        {translation.shoppingLists.owner}: {list.owner.name}
+        {isOwner && <span className="list-tile-owner-badge">{translation.shoppingLists.youBadge}</span>}
       </div>
     </>
   )
@@ -47,7 +47,7 @@ export async function ShoppingLists({ showArchived, failed, me, translation }: {
   const lists = await fetchAllLists(showArchived, failed);
 
   if (lists.length === 0) {
-    return <p>No shopping lists available.</p>;
+    return <p>{translation.shoppingLists.noLists}</p>;
   }
 
   return (
