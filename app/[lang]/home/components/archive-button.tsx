@@ -1,13 +1,15 @@
 'use client';
 
 import { toggleArchiveAction } from "../actions";
+import type { Translation } from "../translations";
 
 type ArchiveButtonProps = {
   listId: string;
   isArchived: boolean;
+  translation: Translation;
 };
 
-export function ArchiveButton({ listId, isArchived }: ArchiveButtonProps) {
+export function ArchiveButton({ listId, isArchived, translation }: ArchiveButtonProps) {
   const handleToggle = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
@@ -18,9 +20,9 @@ export function ArchiveButton({ listId, isArchived }: ArchiveButtonProps) {
     <button
       onClick={handleToggle}
       className="archive-list-button"
-      title={isArchived ? "Unarchive list" : "Archive list"}
+      title={isArchived ? translation.archiveButton.unarchive : translation.archiveButton.archive}
     >
-      {isArchived ? "Unarchive" : "Archive"}
+      {isArchived ? translation.archiveButton.unarchive : translation.archiveButton.archive}
     </button>
   );
 }

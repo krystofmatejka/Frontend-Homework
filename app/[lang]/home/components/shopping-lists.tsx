@@ -1,9 +1,10 @@
 import Link from "next/link";
-import { fetchAllLists } from "./actions";
-import type { ShoppingList, User } from "../../types";
-import { ArchiveButton } from "./components/archive-button";
+import { fetchAllLists } from "../actions";
+import { ArchiveButton } from "./archive-button";
+import type { ShoppingList, User } from "../../../types";
+import type { Translation } from "../translations";
 
-function ListTile({ list, me }: { list: ShoppingList; me: User }) {
+function ListTile({ list, me, translation }: { list: ShoppingList; me: User; translation: Translation }) {
   const isOwner = list.owner.id === me.id;
   const activeItemsCount = list.items.filter(item => item.isActive).length;
   const totalItemsCount = list.items.length;
@@ -35,14 +36,14 @@ function ListTile({ list, me }: { list: ShoppingList; me: User }) {
       )}
       {isOwner && (
         <div className="list-tile-actions">
-          <ArchiveButton listId={list.id} isArchived={list.isArchived ?? false} />
+          <ArchiveButton listId={list.id} isArchived={list.isArchived ?? false} translation={translation} />
         </div>
       )}
     </div>
   );
 }
 
-export async function ShoppingLists({ showArchived, failed, me }: { showArchived: boolean; failed: boolean; me: User }) {
+export async function ShoppingLists({ showArchived, failed, me, translation }: { showArchived: boolean; failed: boolean; me: User; translation: Translation }) {
   const lists = await fetchAllLists(showArchived, failed);
 
   if (lists.length === 0) {
@@ -52,7 +53,7 @@ export async function ShoppingLists({ showArchived, failed, me }: { showArchived
   return (
     <div className="lists-grid">
       {lists.map((list) => (
-        <ListTile key={list.id} list={list} me={me} />
+        <ListTile key={list.id} list={list} me={me} translation={translation} />
       ))}
     </div>
   );
