@@ -32,13 +32,7 @@ export function LanguageSwitch() {
   return (
     <div style={{
       padding: '20px 20px 20px 0',
-      display: 'flex',
-      alignItems: 'center',
-      gap: '12px',
     }}>
-      <label htmlFor="language-select" style={{ fontSize: '14px', fontWeight: '500' }}>
-        Language:
-      </label>
       <select
         id="language-select"
         value={currentLang}
