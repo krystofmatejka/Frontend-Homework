@@ -1,28 +1,19 @@
-'use client';
-
 import type { ShoppingListItem } from "../../../../types";
 import type { DetailTranslation } from "../translations";
 
-export function Stats({ items, translation }: { items: ShoppingListItem[]; translation: DetailTranslation }) {
+export function Stats({ items, translation, show }: { items: ShoppingListItem[]; translation: DetailTranslation, show: boolean }) {
+  if (!show) {
+    return null;
+  }
+  
   const completedCount = items.filter(item => !item.isActive).length;
   const notCompletedCount = items.filter(item => item.isActive).length;
   const total = items.length;
 
-  if (total === 0) {
-    return null;
-  }
-
   const completedPercentage = (completedCount / total) * 100;
   const notCompletedPercentage = (notCompletedCount / total) * 100;
-
-  console.log({ completedCount, notCompletedCount, total });
-
-  // Calculate angles for pie chart
   const completedAngle = (completedCount / total) * 360;
 
-  console.log({ completedAngle });
-
-  // Function to create pie slice path
   const getSlicePath = (startAngle: number, endAngle: number) => {
     const radius = 140;
     const centerX = 220;
@@ -49,7 +40,6 @@ export function Stats({ items, translation }: { items: ShoppingListItem[]; trans
       margin: '20px 0',
       border: '1px solid #e0e0e0',
       borderRadius: '8px',
-      backgroundColor: '#f9f9f9'
     }}>
       <h3 style={{ marginTop: 0, marginBottom: '20px', textAlign: 'center' }}>
         {translation.stats.title}
