@@ -1,6 +1,7 @@
 import Link from 'next/link';
+import type { DetailTranslation } from '../translations';
 
-export function ActiveFilter({ listId, isActive }: { listId: string; isActive: boolean }) {
+export function ActiveFilter({ listId, isActive, translation }: { listId: string; isActive: boolean; translation: DetailTranslation }) {
   const newIsActive = !isActive;
   return (
     <Link
@@ -10,7 +11,7 @@ export function ActiveFilter({ listId, isActive }: { listId: string; isActive: b
       }}
       className="active-filter-link"
     >
-      {isActive ? 'Show All Items' : 'Show Active Items'}
+      {isActive ? translation.activeFilter.showAll : translation.activeFilter.showActive}
     </Link>
   )
 }

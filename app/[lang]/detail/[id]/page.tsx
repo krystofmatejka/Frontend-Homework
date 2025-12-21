@@ -6,9 +6,10 @@ import { NewItem } from "./components/new-item";
 import { ListItems } from "./components/list-items";
 import { ActiveFilter } from "./components/active-filter";
 import { ListHeader } from "./components/list-header";
+import { detailPageTranslations, type DetailTranslation } from "./translations";
 import type { User } from "../../../types";
 
-async function DetailList({ id, isActive, me, users }: { id: string; isActive: boolean; me: User; users: User[] }) {
+async function DetailList({ id, isActive, me, users, translation }: { id: string; isActive: boolean; me: User; users: User[]; translation: DetailTranslation }) {
   const list = await fetchList(id, isActive);
 
   if (!list) {
@@ -17,18 +18,19 @@ async function DetailList({ id, isActive, me, users }: { id: string; isActive: b
 
   return (
     <>
-      <ListHeader listId={id} currentTitle={list.title} owner={list.owner} members={list.members} me={me} users={users} />
-      <NewItem listId={id} />
-      <ActiveFilter listId={id} isActive={isActive} />
-      <ListItems listId={id} items={list.items} />
+      <ListHeader listId={id} currentTitle={list.title} owner={list.owner} members={list.members} me={me} users={users} translation={translation} />
+      <NewItem listId={id} translation={translation} />
+      <ActiveFilter listId={id} isActive={isActive} translation={translation} />
+      <ListItems listId={id} items={list.items} translation={translation} />
     </>
   );
 }
 
-export default async function DetailPage({ params, searchParams }: { params: Promise<{ id: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
+export default async function DetailPage({ params, searchParams }: { params: Promise<{ lang: string; id: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }> }) {
   const unwrappedParams = await params;
   const unwrappedSearchParams = await searchParams;
   const isActiveParam = Boolean(unwrappedSearchParams.isActive === undefined || unwrappedSearchParams.isActive === 'true');
+  const translation = detailPageTranslations[unwrappedParams.lang as keyof typeof detailPageTranslations];
 
   const [me, users] = await Promise.all([
     fetchMe(),
@@ -36,8 +38,8 @@ export default async function DetailPage({ params, searchParams }: { params: Pro
   ]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
-      <DetailList id={unwrappedParams.id} isActive={Boolean(isActiveParam)} me={me} users={users} />
+    <Suspense fallback={<div>{translation.loading}</div>}>
+      <DetailList id={unwrappedParams.id} isActive={Boolean(isActiveParam)} me={me} users={users} translation={translation} />
     </Suspense>
   );
 }

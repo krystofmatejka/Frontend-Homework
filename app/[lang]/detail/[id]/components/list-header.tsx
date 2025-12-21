@@ -3,8 +3,9 @@
 import { useActionState, useState } from "react";
 import { updateListTitleAction, updateListMembersAction, leaveListAction } from "../actions";
 import type { User } from "../../../../types";
+import type { DetailTranslation } from "../translations";
 
-export function ListHeader({ listId, currentTitle, owner, members, me, users }: { listId: string; currentTitle: string, owner: User; members: User[]; me: User; users: User[] }) {
+export function ListHeader({ listId, currentTitle, owner, members, me, users, translation }: { listId: string; currentTitle: string, owner: User; members: User[]; me: User; users: User[]; translation: DetailTranslation }) {
   const [state, formAction, pending] = useActionState(updateListTitleAction, null);
   const [stateMembers, formActionMembers, pendingMembers] = useActionState(updateListMembersAction, null);
   const [stateLeave, formActionLeave, pendingLeave] = useActionState(leaveListAction, null);
@@ -32,7 +33,7 @@ export function ListHeader({ listId, currentTitle, owner, members, me, users }: 
     return (
       <div className="list-header-layout">
         <h2>{currentTitle}</h2>
-        <button type="button" onClick={() => setIsEdditing(true)} disabled={pending} className="primary-button">Start editing</button>
+        <button type="button" onClick={() => setIsEdditing(true)} disabled={pending} className="primary-button">{translation.listHeader.startEditing}</button>
       </div>
     )
   }
@@ -45,7 +46,7 @@ export function ListHeader({ listId, currentTitle, owner, members, me, users }: 
             <input type="hidden" name="listId" value={listId} />
             <input type="text" name="title" defaultValue={currentTitle} className="edit-item-input" />
             <button type="submit" disabled={pending} className="primary-button">
-              {pending ? 'Updating...' : 'Update Title'}
+              {pending ? translation.listHeader.updating : translation.listHeader.updateTitle}
             </button>
           </form>
           <form action={handleMembersFormAction}>
@@ -56,12 +57,12 @@ export function ListHeader({ listId, currentTitle, owner, members, me, users }: 
               ))}
             </select>
             <button type="submit" disabled={pendingMembers} className="primary-button">
-              {pendingMembers ? 'Updating...' : 'Update Members'}
+              {pendingMembers ? translation.listHeader.updating : translation.listHeader.updateMembers}
             </button>
           </form>
         </div>
         <button onClick={() => setIsEdditing(false)} disabled={pending || pendingMembers} className="primary-button">
-          Stop editing
+          {translation.listHeader.stopEditing}
         </button>
       </div>
     )
@@ -74,7 +75,7 @@ export function ListHeader({ listId, currentTitle, owner, members, me, users }: 
         <form action={handleLeaveListAction}>
           <input type="hidden" name="listId" value={listId} />
           <button type="submit" disabled={pendingLeave} className="primary-button">
-            {pendingLeave ? 'Leaving...' : 'Leave list'}
+            {pendingLeave ? translation.listHeader.leaving : translation.listHeader.leaveList}
           </button>
         </form>
       </div>
