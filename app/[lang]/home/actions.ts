@@ -2,7 +2,7 @@
 
 import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
-import type { ShoppingList } from "../types";
+import type { ShoppingList } from "../../types";
 
 const BACKEND_URL = process.env.BACKEND_URL || 'http://localhost:3100';
 

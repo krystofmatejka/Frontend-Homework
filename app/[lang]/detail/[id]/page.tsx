@@ -1,12 +1,12 @@
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
 import { fetchList } from "./actions";
-import { fetchMe, fetchAllUsers } from "../../users/actions";
+import { fetchMe, fetchAllUsers } from "../../../users/actions";
 import { NewItem } from "./components/new-item";
 import { ListItems } from "./components/list-items";
 import { ActiveFilter } from "./components/active-filter";
 import { ListHeader } from "./components/list-header";
-import type { User } from "../../types";
+import type { User } from "../../../types";
 
 async function DetailList({ id, isActive, me, users }: { id: string; isActive: boolean; me: User; users: User[] }) {
   const list = await fetchList(id, isActive);

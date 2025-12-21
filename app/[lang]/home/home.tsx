@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { ShoppingLists } from "./shopping-lists";
 import { NewListModal } from "./components/new-list-modal";
 import { ArchiveToggle } from "./components/archive-toggle";
-import type { User } from "../types";
+import type { User } from "../../types";
 
 type HomeProps = {
   showArchived: boolean;

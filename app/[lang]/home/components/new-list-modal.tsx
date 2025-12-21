@@ -2,7 +2,7 @@
 
 import { useActionState, useState, useRef } from "react";
 import { createListAction } from "../actions";
-import type { User } from "../../types";
+import type { User } from "../../../types";
 
 export function NewListModal({ users }: { users: User[] }) {
   const [isOpen, setIsOpen] = useState(false);

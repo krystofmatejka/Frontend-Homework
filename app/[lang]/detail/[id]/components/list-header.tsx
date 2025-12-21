@@ -2,7 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { updateListTitleAction, updateListMembersAction, leaveListAction } from "../actions";
-import type { User } from "../../../types";
+import type { User } from "../../../../types";
 
 export function ListHeader({ listId, currentTitle, owner, members, me, users }: { listId: string; currentTitle: string, owner: User; members: User[]; me: User; users: User[] }) {
   const [state, formAction, pending] = useActionState(updateListTitleAction, null);

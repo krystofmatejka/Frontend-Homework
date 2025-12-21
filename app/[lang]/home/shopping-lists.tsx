@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { fetchAllLists } from "./actions";
-import type { ShoppingList, User } from "../types";
+import type { ShoppingList, User } from "../../types";
 import { ArchiveButton } from "./components/archive-button";
 
 function ListTile({ list, me }: { list: ShoppingList; me: User }) {
