@@ -15,7 +15,8 @@ export function proxy(request: NextRequest) {
   // If path is just '/', redirect to /home with language
   if (pathname === '/') {
     const lang = cookieLang && languages.includes(cookieLang) ? cookieLang : defaultLanguage;
-    const response = NextResponse.redirect(new URL(`/${lang}/home`, request.url));
+    const url = new URL(`/${lang}/home${request.nextUrl.search}`, request.url);
+    const response = NextResponse.redirect(url);
     response.cookies.set(cookieName, lang, { path: '/', maxAge: 60 * 60 * 24 * 365 }); // 1 year
     return response;
   }
@@ -24,8 +25,8 @@ export function proxy(request: NextRequest) {
   if (!hasLangInPath) {
     // Use cookie language or default
     const lang = cookieLang && languages.includes(cookieLang) ? cookieLang : defaultLanguage;
-    const newPathname = `/${lang}${pathname}`;
-    const response = NextResponse.redirect(new URL(newPathname, request.url));
+    const url = new URL(`/${lang}${pathname}${request.nextUrl.search}`, request.url);
+    const response = NextResponse.redirect(url);
     response.cookies.set(cookieName, lang, { path: '/', maxAge: 60 * 60 * 24 * 365 }); // 1 year
     return response;
   }
