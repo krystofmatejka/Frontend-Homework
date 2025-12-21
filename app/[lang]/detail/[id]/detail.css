@@ -119,6 +119,7 @@ button {
   width: 100%;
   text-align: left;
   padding: 0.5rem 0;
+  color: var(--text-primary);
 }
 
 .detail-item-inactive {
