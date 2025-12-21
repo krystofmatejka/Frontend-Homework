@@ -5,7 +5,7 @@ export function Stats({ items, translation, show }: { items: ShoppingListItem[];
   if (!show) {
     return null;
   }
-  
+
   const completedCount = items.filter(item => !item.isActive).length;
   const notCompletedCount = items.filter(item => item.isActive).length;
   const total = items.length;
@@ -18,7 +18,7 @@ export function Stats({ items, translation, show }: { items: ShoppingListItem[];
     const radius = 140;
     const centerX = 220;
     const centerY = 260;
-    
+
     const start = getCoordinatesForAngle(startAngle, radius, centerX, centerY);
     const end = getCoordinatesForAngle(endAngle, radius, centerX, centerY);
     const largeArcFlag = endAngle - startAngle > 180 ? 1 : 0;
@@ -49,45 +49,45 @@ export function Stats({ items, translation, show }: { items: ShoppingListItem[];
         <svg width="200" height="200" viewBox="80 120 280 280" xmlns="http://www.w3.org/2000/svg">
           {/* Completed slice (blue) */}
           {completedCount > 0 && completedCount < total && (
-            <path 
-              d={getSlicePath(0, completedAngle)} 
-              fill="#36A2EB" 
-              stroke="white" 
-              strokeWidth="2" 
+            <path
+              d={getSlicePath(0, completedAngle)}
+              fill="#36A2EB"
+              stroke="white"
+              strokeWidth="2"
             />
           )}
-          
+
           {/* Completed full circle */}
           {completedCount === total && (
-            <circle 
-              cx="220" 
-              cy="260" 
-              r="140" 
-              fill="#36A2EB" 
-              stroke="white" 
-              strokeWidth="2" 
+            <circle
+              cx="220"
+              cy="260"
+              r="140"
+              fill="#36A2EB"
+              stroke="white"
+              strokeWidth="2"
             />
           )}
-          
+
           {/* Not completed slice (red) */}
           {notCompletedCount > 0 && notCompletedCount < total && (
-            <path 
-              d={getSlicePath(completedAngle, 360)} 
-              fill="#FF6384" 
-              stroke="white" 
-              strokeWidth="2" 
+            <path
+              d={getSlicePath(completedAngle, 360)}
+              fill="#FF6384"
+              stroke="white"
+              strokeWidth="2"
             />
           )}
-          
+
           {/* Not completed full circle */}
           {notCompletedCount === total && (
-            <circle 
-              cx="220" 
-              cy="260" 
-              r="140" 
-              fill="#FF6384" 
-              stroke="white" 
-              strokeWidth="2" 
+            <circle
+              cx="220"
+              cy="260"
+              r="140"
+              fill="#FF6384"
+              stroke="white"
+              strokeWidth="2"
             />
           )}
         </svg>
