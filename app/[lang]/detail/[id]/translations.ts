@@ -4,6 +4,14 @@ export const detailPageTranslations = {
       title: 'Shopping List',
     },
     loading: 'Loading...',
+    error: {
+      title: 'Something went wrong.',
+      tryAgain: 'Try again',
+    },
+    notFound: {
+      title: 'Item Not Found',
+      message: 'The item you are looking for does not exist.',
+    },
     newItem: {
       error: 'Error adding item.',
       success: 'Item "{itemName}" added!',
@@ -33,6 +41,14 @@ export const detailPageTranslations = {
       title: 'Nákupní seznam',
     },
     loading: 'Načítání...',
+    error: {
+      title: 'Něco se pokazilo.',
+      tryAgain: 'Zkusit znovu',
+    },
+    notFound: {
+      title: 'Položka nenalezena',
+      message: 'Položka, kterou hledáte, neexistuje.',
+    },
     newItem: {
       error: 'Chyba při přidávání položky.',
       success: 'Položka "{itemName}" přidána!',
@@ -62,6 +78,14 @@ export const detailPageTranslations = {
       title: 'Einkaufsliste',
     },
     loading: 'Laden...',
+    error: {
+      title: 'Etwas ist schief gelaufen.',
+      tryAgain: 'Erneut versuchen',
+    },
+    notFound: {
+      title: 'Artikel nicht gefunden',
+      message: 'Der gesuchte Artikel existiert nicht.',
+    },
     newItem: {
       error: 'Fehler beim Hinzufügen des Artikels.',
       success: 'Artikel "{itemName}" hinzugefügt!',

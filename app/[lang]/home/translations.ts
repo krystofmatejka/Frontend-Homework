@@ -4,6 +4,10 @@ export const homePageTranslations = {
       title: 'Shopping Lists',
       loading: 'Loading...',
     },
+    error: {
+      title: 'Something went wrong.',
+      tryAgain: 'Try again',
+    },
     archiveButton: {
       archive: 'Archive',
       unarchive: 'Unarchive',
@@ -35,6 +39,10 @@ export const homePageTranslations = {
       title: 'Nákupní seznamy',
       loading: 'Načítání...',
     },
+    error: {
+      title: 'Něco se pokazilo.',
+      tryAgain: 'Zkusit znovu',
+    },
     archiveButton: {
       archive: 'Archivovat',
       unarchive: 'Odarchivovat',
@@ -65,6 +73,10 @@ export const homePageTranslations = {
     home: {
       title: 'Einkaufslisten',
       loading: 'Laden...',
+    },
+    error: {
+      title: 'Etwas ist schief gelaufen.',
+      tryAgain: 'Erneut versuchen',
     },
     archiveButton: {
       archive: 'Archivieren',
