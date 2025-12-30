@@ -2,9 +2,10 @@
 
 import { useActionState, useState, useRef } from "react";
 import { createListAction } from "../actions";
-import type { User } from "../../types";
+import type { User } from "../../../types";
+import type { Translation } from "../translations";
 
-export function NewListModal({ users }: { users: User[] }) {
+export function NewListModal({ users, translation }: { users: User[]; translation: Translation }) {
   const [isOpen, setIsOpen] = useState(false);
   const [state, formAction, pending] = useActionState(createListAction, null);
   const formRef = useRef<HTMLFormElement>(null);
@@ -25,14 +26,14 @@ export function NewListModal({ users }: { users: User[] }) {
         onClick={handleOpen} 
         className="primary-button"
       >
-        New List
+        {translation.newList.newList}
       </button>
 
       {isOpen && (
         <div className="modal-overlay" onClick={handleClose}>
           <div className="modal-content" onClick={(e) => e.stopPropagation()}>
             <div className="modal-header">
-              <h2>Create New Shopping List</h2>
+              <h2>{translation.newList.createNewShoppingList}</h2>
               <button 
                 type="button" 
                 onClick={handleClose} 
@@ -45,7 +46,7 @@ export function NewListModal({ users }: { users: User[] }) {
 
             <form ref={formRef} action={formAction}>
               <div className="modal-form-group">
-                <label htmlFor="title" className="modal-label">List Name</label>
+                <label htmlFor="title" className="modal-label">{translation.newList.listName}</label>
                 <input 
                   type="text" 
                   id="title"
@@ -57,7 +58,7 @@ export function NewListModal({ users }: { users: User[] }) {
               </div>
 
               <div className="modal-form-group">
-                <label htmlFor="members" className="modal-label">Members</label>
+                <label htmlFor="members" className="modal-label">{translation.newList.members}</label>
                 <select 
                   id="members"
                   name="members" 
@@ -68,7 +69,7 @@ export function NewListModal({ users }: { users: User[] }) {
                     <option key={user.id} value={user.id}>{user.name}</option>
                   ))}
                 </select>
-                <p className="modal-help-text">Hold Ctrl/Cmd to select multiple members</p>
+                <p className="modal-help-text">{translation.newList.multiselect}</p>
               </div>
 
               {state && !state.success && (
@@ -82,14 +83,14 @@ export function NewListModal({ users }: { users: User[] }) {
                   className="secondary-button"
                   disabled={pending}
                 >
-                  Cancel
+                  {translation.newList.cancel}
                 </button>
                 <button 
                   type="submit" 
                   className="primary-button"
                   disabled={pending}
                 >
-                  {pending ? 'Creating...' : 'Create List'}
+                  {pending ? translation.newList.creating : translation.newList.createList}
                 </button>
               </div>
             </form>
